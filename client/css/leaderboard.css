@@ -1,0 +1,115 @@
+/* leaderboard.css — หน้า Leaderboard */
+
+.board {
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.board-header {
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.board-header h2 {
+  color: var(--circuit-dark);
+  font-size: 1.7rem;
+}
+
+.tabs {
+  display: flex;
+  gap: 8px;
+  margin: 18px 0;
+  border-bottom: 2px solid var(--ink);
+}
+
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 10px 8px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--ink-soft);
+  border-bottom: 3px solid transparent;
+  transform: translateY(2px);
+}
+
+.tab.is-active {
+  color: var(--circuit-dark);
+  border-bottom-color: var(--copper);
+}
+
+.board-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.board-row {
+  display: grid;
+  grid-template-columns: 40px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  background: var(--paper);
+}
+
+.board-row--gold { border-color: var(--copper); background: #f6e9d6; }
+.board-row--silver { border-color: #9aa39c; }
+.board-row--bronze { border-color: #b08356; }
+
+.board-row__rank {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  text-align: center;
+}
+
+.board-row__info {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+  min-width: 0;
+}
+
+.board-row__name {
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.board-row__date {
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+  font-family: var(--font-mono);
+}
+
+.board-row__score {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--circuit-dark);
+}
+
+.board-empty {
+  text-align: center;
+  color: var(--ink-soft);
+  padding: 30px 10px;
+}
+
+.board-loading {
+  text-align: center;
+  color: var(--ink-soft);
+  padding: 30px 10px;
+  font-family: var(--font-mono);
+}
+
+.board-footer {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 22px;
+}

@@ -1,0 +1,309 @@
+/* game.css — หน้าเล่นเกม / Game Over / How to Play */
+
+.game-wrap {
+  width: 100%;
+  /* ปรับขนาดกล่องเกมได้ตามใจ แก้ตัวเลขนี้ตัวเดียว (px) แล้วตัว canvas จะยืด/หดตามอัตโนมัติ
+     แนะนำให้ตั้งค่าใกล้เคียงกับ CANVAS_W ใน game.js เพื่อความคมชัดสูงสุด ไม่บังคับต้องเท่ากัน */
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.hud {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: var(--radius);
+  padding: 12px 18px;
+  margin-bottom: 12px;
+  font-family: var(--font-mono);
+  border: 2px solid var(--ink);
+}
+
+.hud__block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 78px;
+}
+
+.hud__label {
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  color: var(--glow);
+  text-transform: uppercase;
+}
+
+.hud__value {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.hud__value--time.is-low {
+  color: var(--alert);
+  animation: pulse 0.6s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.canvas-frame {
+  position: relative;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-hard);
+  background: linear-gradient(180deg, #f7f4ea 0%, var(--paper-dim) 100%);
+  touch-action: none;
+}
+
+#gameCanvas {
+  display: block;
+  width: 100%;
+  height: 720px;
+  cursor: crosshair;
+}
+
+.floater {
+  position: absolute;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 1.1rem;
+  pointer-events: none;
+  animation: floatUp 0.7s ease-out forwards;
+}
+.floater--good { color: var(--circuit-dark); }
+.floater--bad { color: var(--alert); }
+
+@keyframes floatUp {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-40px); opacity: 0; }
+}
+
+.combo-badge {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--paper);
+  border: 2px solid var(--copper-dark, var(--ink));
+  font-family: var(--font-mono);
+  z-index: 4;
+  box-shadow: var(--shadow-hard);
+}
+
+.combo-badge__label {
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  color: var(--glow);
+  text-transform: uppercase;
+}
+
+.combo-badge__value {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.combo-badge--pulse {
+  animation: comboPulse 0.35s ease-out;
+}
+
+@keyframes comboPulse {
+  0% { transform: translateX(-50%) scale(1.25); }
+  100% { transform: translateX(-50%) scale(1); }
+}
+
+.bonus-banner {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 12px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-align: center;
+  color: var(--paper);
+  background: linear-gradient(90deg, var(--alert), var(--copper-dark, var(--alert)));
+  z-index: 4;
+  animation: bonusGlow 0.9s ease-in-out infinite;
+}
+
+@keyframes bonusGlow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.72; }
+}
+
+.game-controls {
+  display: flex;
+  justify-content: center;
+  margin-top: 14px;
+}
+
+/* จอขาวโพลนตอนโดนไอเทม "ระเบิดนิวเคลียร์" (คุม opacity ผ่าน JS ใน game.js) */
+.nuke-flash {
+  position: absolute;
+  inset: 0;
+  background: #ffffff;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 6;
+}
+
+.countdown-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(30, 43, 34, 0.82);
+  color: var(--paper);
+  font-family: var(--font-display);
+  font-size: 4rem;
+  font-weight: 800;
+  z-index: 5;
+}
+
+/* ============ Game Over ============ */
+.result-card {
+  max-width: 420px;
+  margin: 40px auto 0;
+  text-align: center;
+}
+
+.result-card__label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+}
+
+.result-card__score {
+  font-family: var(--font-mono);
+  font-size: 3.6rem;
+  font-weight: 700;
+  color: var(--circuit-dark);
+  margin: 6px 0 4px;
+}
+
+.result-card__player {
+  color: var(--copper-dark);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.result-card__combo {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  margin-bottom: 18px;
+}
+
+.result-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.save-status {
+  min-height: 1.4em;
+  font-size: 0.88rem;
+  color: var(--circuit-dark);
+  margin-top: 8px;
+}
+
+/* ============ How to Play ============ */
+.howto {
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.howto h2 {
+  color: var(--circuit-dark);
+  font-size: 1.5rem;
+  margin-bottom: 4px;
+}
+
+.howto-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 18px 0;
+  /* ปรับขนาดไอคอนขยะทั้งหมด (ในหน้า How to Play) ได้ที่ตัวแปรนี้ตัวเดียว */
+  --waste-icon-size: 50px;
+}
+
+.waste-tile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  background: var(--paper);
+}
+
+.waste-tile__icon {
+  font-size: calc(var(--waste-icon-size) * 0.45);
+  width: var(--waste-icon-size);
+  height: var(--waste-icon-size);
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.waste-tile__meta {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.waste-tile__points {
+  font-family: var(--font-mono);
+  font-weight: 700;
+}
+
+.waste-tile--good { border-color: var(--circuit); }
+.waste-tile--good .waste-tile__points { color: var(--circuit-dark); }
+.waste-tile--bad { border-color: var(--alert); }
+.waste-tile--bad .waste-tile__points { color: var(--alert); }
+
+/* ไอเทมพิเศษ: ใช้เส้นขอบคู่/หนากว่าเดิมเล็กน้อย ให้ดูเด่นแยกจากขยะปกติ (สีบวก/ลบยังใช้ตามผลของมันตามปกติ) */
+.waste-tile--special {
+  border-width: 3px;
+  border-style: dashed;
+  box-shadow: var(--shadow-hard);
+}
+
+.howto ol, .howto ul {
+  margin: 10px 0 10px 20px;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+.back-link {
+  display: inline-block;
+  margin-top: 20px;
+}
+
+@media (max-width: 420px) {
+  .howto-grid {
+    grid-template-columns: 1fr;
+    /* จอเล็ก: ลดขนาดไอคอนลงอัตโนมัติเล็กน้อยเผื่อ --waste-icon-size ถูกตั้งไว้ใหญ่ */
+    --waste-icon-size: 52px;
+  }
+}

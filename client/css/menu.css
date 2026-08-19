@@ -1,0 +1,100 @@
+/* menu.css — หน้า Main Menu */
+
+.menu {
+  width: 100%;
+  max-width: 480px;
+  margin: auto;
+  text-align: center;
+}
+
+.menu-hero {
+  padding: 32px 0 8px;
+}
+
+.menu-hero__icons {
+  font-size: 2.4rem;
+  letter-spacing: 0.4em;
+  margin-bottom: 12px;
+}
+
+.menu-title {
+  font-size: clamp(2rem, 8vw, 2.9rem);
+  font-weight: 800;
+  color: var(--circuit-dark);
+  line-height: 1.1;
+}
+
+.menu-title span {
+  display: block;
+  font-size: 0.42em;
+  font-weight: 600;
+  color: var(--copper-dark);
+  letter-spacing: 0.06em;
+  margin-top: 6px;
+}
+
+.menu-subtitle {
+  margin-top: 14px;
+  color: var(--ink-soft);
+  font-size: 0.98rem;
+}
+
+.menu-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 26px;
+}
+
+.name-field {
+  margin-top: 22px;
+  text-align: left;
+}
+
+.name-field label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 6px;
+}
+
+.name-field__optional {
+  text-transform: none;
+  letter-spacing: normal;
+  font-weight: 400;
+  opacity: 0.7;
+}
+
+.name-field small {
+  display: block;
+  margin-top: 6px;
+  color: var(--alert);
+  font-size: 0.82rem;
+  min-height: 1.1em;
+}
+
+.legend {
+  display: flex;
+  justify-content: center;
+  gap: 22px;
+  margin-top: 26px;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+.legend__item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.legend__dot--good { background: var(--circuit); }
+.legend__dot--bad { background: var(--alert); }
